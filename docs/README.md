@@ -20,6 +20,8 @@ Code is written in NetLogo 6.0 and it is possible to freely download it and run 
 
 To run open `ABMile` and click on `Setup` and then `Go`. Choose parameters before running.
 
+![gif][gif]
+
 ## Solution
 
 Delivery is carry out by Users. These are agents created in random patches and with and assigned random patches as destination. A special patchset is created to represent the storages around the city. Each packages is placed in a locker-patch ad assigned a random point on the map as destination. The User will go from his position to the position of the package, then go the destination of the package and lastly to his own destination.
@@ -46,3 +48,4 @@ May be found interesting for the reader to have a deeper look at two of the most
 [gen]: img/gen.png "Behavior Search result: 10 storages with 304 boxes each, total expense 1439.28"
 [gen2]: img/gen2.png "Behavior Search result: 10 storages with 153 boxes each, total expense 1542.02"
 [concl]: img/concl.png
+[gif]: img/gif.gif "gif"

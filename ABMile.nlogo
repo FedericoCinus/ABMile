@@ -11,6 +11,7 @@ users-own [destination cost busy bag trader?]
 patches-own [storage? space]
 
 
+
 ;; Setup Botton
 to setup
   clear-all
@@ -60,6 +61,7 @@ to go
   auction
   move
   tick
+  export-view (word ticks "imagine.png")
   if count packs = 0 and go_on = false [print "average expense:" print (expenses / numb_packs) print "time:" print ticks print "total expense:" print expenses stop]
   set spike 0
   if ticks mod halfday = 0 [ifelse time = "morning" [set time "evening" set spike 100][set time "morning" set days (days + 1) set spike 100]]
