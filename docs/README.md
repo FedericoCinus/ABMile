@@ -44,5 +44,5 @@ May be found interesting for the reader to have a deeper look at two of the most
 ![concl][concl]
 
 [gen]: img/gen.png "Behavior Search result: 10 storages with 304 boxes each, total expense 1439.28"
-[ge2]: img/gen2.png "Behavior Search result: 10 storages with 153 boxes each, total expense 1542.02"
+[gen2]: img/gen2.png "Behavior Search result: 10 storages with 153 boxes each, total expense 1542.02"
 [concl]: img/concl.png
