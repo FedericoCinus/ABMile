@@ -16,7 +16,7 @@ More detail on Article.pdf in the Github repository.
 ## Run
 
 Download ABMile from GitHub repository.
-Code is written in NetLogo 6.0 and it is possible to freely download it and run the simulation (#https://ccl.northwestern.edu/netlogo/download.shtml).
+Code is written in NetLogo 6.0 and it is possible to freely download it and run the simulation (https://ccl.northwestern.edu/netlogo/download.shtml).
 
 To run open `ABMile` and click on `Setup` and then `Go`. Choose parameters before running.
 
