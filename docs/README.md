@@ -1,102 +1,48 @@
-# MonteIsing
+# ABMile
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 ## ToC
 - [Overview](#overview)
 - [Run](#run)
-- [Lattice Class](#lattice-class)
-- [DrawLattice Class](#drawlattice-class)
-- [Structure of the Lattice](#structure-of-the-lattice)
-- [Multidimensional Neighbours Interactions and Counting](#multidimensional-neighbour-interactions-and-counting)
+- [Solution](#Solution)
+- [Results](#Results)
+
 
 ## Overview
 
+In this work is introduced the Last Mile problem and the Agent-Based modelling process. A solution for the Last Mile problem is proposed suggesting an active engagement of the population. Some estimation has been done in order to make the simulation suitable for representing the city of Turin and actual cost of the delivering process. Results show the robustness of the proposed solution both in economical and user’s engagement terms, discussing also extreme situation.
+
+More detail on Article.pdf in the Github repository (https://github.com/MrFrankCin/ABMile)
+
 ## Run
 
-To run open `root` and run `.x compileMacro.C`. You can try
-the axamples loading with `.L`.
+Download ABMile from https://github.com/MrFrankCin/ABMile.
+Code is written in NetLogo 6.0 and it is possible to freely download it and run the simulation (https://ccl.northwestern.edu/netlogo/download.shtml).
 
-## Lattice Class
+To run open `ABMile` and click on `Setup` and then `Go`. Choose parameters before running.
 
-The class can build a multi dimensional square lattice of spins.
+## Solution
 
-$$ H = - \sum_{\langle i, j\rangle}^{}J_{ij} \sigma_i \sigma_j - \mu \sum_{i=1}^{N} \sigma_i $$
+Delivery is carry out by Users. These are agents created in random patches and with and assigned random patches as destination. A special patchset is created to represent the storages around the city. Each packages is placed in a locker-patch ad assigned a random point on the map as destination. The User will go from his position to the position of the package, then go the destination of the package and lastly to his own destination.
 
-$$ J_{ij} = 1 \text{ and } \mu = 1 $$
-
-## DrawLattice Class
-
-The class can draw 2D or 3D lattice from the class Lattice.
-
-![Cooling 2D 1][cooling2D-1] ![Cooling 2D 2][cooling2D-2]
-![Cooling 2D 3][cooling2D-3] ![Cooling 2D 4][cooling2D-4]
-
-1000000 spin 2D model at $$ T \approx 0.5 $$. Each frame is the flipping
-of 1000 spins. First video goes from 0 to 20000th iterations, then
-each gif continues with the next 20000. Notice that periodic
-boundary conditions during the islands formation.
-
-## Structure of the Lattice
-
-The lattice is a multidimensional grid. We store it in a one
-dimensional array, which means that we have to choose a convention.
-The lattice is periodical, so we can imagine a torus for
-a 2D lattice...
-
-![Torus][torus]
-
-...and so on...
-
-![Torus 4D][torus4D]
-
-Imagine the vector of spins wrapped on itself as many times as
-the dimension of the problem.
-Here, a 3D representation:
-
-![3D Lattice][3dlat]
-
-It's necessary to remember these assumptions when measuring quantities
-such as energy on the lattice.
-
-## Multidimensional Neighbour Interactions and Counting
-
-Since the lattice is a mono dimensional `bool *` we need a method to
-count the neighbours of each spin.
-
-Here are examples of neighbour counting for mono dimensional and
-bi dimensional lattice.
-
-![1D Model][1Dmodel]
-
-![2D model][2Dmodel]
-
-Reduntant terms were omitted: `(i // N) * N` is zero when in max
-dimension, also, `(i + 1) % N` `(i - 1 -N) % N` may be reduntant.
-
-We can easily see a pattern. We use `i` as the index of the
-spin in the lattice, `d` is a particular dimension where we
-want to find the neighbours.
-For a simple notation we used `//` and `**` in a python-ish style
-meaning respectively integer division and power (power comes before
-all the other operations).
-
-```
-(i // N**(d + 1))*N**(d + 1) + (i + N**d             ) % N**(d + 1)
-(i // N**(d + 1))*N**(d + 1) + (i - N**d + N**(d + 1)) % N**(d + 1)
-```
-We can loop on `i` and `d` to obtain all the neighbours. The process
-can be executed in parallel and be reduced with `if` statements on
-the first and last iteration.
-
-The first reduction is much more sensitive since let us to evaluate
-a single power for each dimension > 1.
+To optimize the travel we will use an auction for each package. Moreover packages are not placed randomly in the storages patches but, if the space is enough, each package will be placed in the storage nearest to its destination.
 
 
-[1Dmodel]: img/1D.png "1D Model"
-[2Dmodel]: img/2D.png "2D Model"
-[cooling2D-1]: img/1-25.gif "Cooling of 2D Lattice"
-[cooling2D-2]: img/2-25.gif "Cooling of 2D Lattice"
-[cooling2D-3]: img/3-25.gif "Cooling of 2D Lattice"
-[cooling2D-4]: img/4-25.gif "Cooling of 2D Lattice"
-[3dlat]: img/structure.png "3D lattice structure"
-[torus]: img/torus.png "Torus"
-[torus4D]: img/torus4D.jpg "Torus in 4D"
+## Results
+
+Using genetic algorithms implemented in Behavior Search 6.0 we optimized the num- ber of storages and their space, keeping all other estimated parameters fixed such as the number of users, the number of packs and the cost of each box in the storage.
+
+Figure below show the fitness minimization (expenses) with the following parameters: 1400 packs, 700 users, 1e/km for users’ deviation, 1.75e as maximum expense for a pack delivery, 0.2e cost storage’s box.
+
+![gen][gen]
+
+Considering 0.8e as storage’s box cost, we find again that the number of boxes in each storage is greater than the minimum needed. This implies that spending money for having bigger storage is useful in case a pack has to be delivered in the neighborhood.
+
+![gen2][gen2]
+
+May be found interesting for the reader to have a deeper look at two of the most important curves in our simulation: number packs vs. time and total expenses vs. time. The figure below show that the number of packs exponentially decreases with time as expected. On the other hand the total expenses approximately increase as a logarithm, which compensates the number of packs trend.
+
+![concl][concl]
+
+[gen]: img/gen.png "Behavior Search result: 10 storages with 304 boxes each, total expense 1439.28"
+[ge2]: img/gen2.png "Behavior Search result: 10 storages with 153 boxes each, total expense 1542.02"
+[concl]: img/concl.png
