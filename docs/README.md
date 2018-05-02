@@ -11,12 +11,12 @@
 
 In this work is introduced the Last Mile problem and the Agent-Based modelling process. A solution for the Last Mile problem is proposed suggesting an active engagement of the population. Some estimation has been done in order to make the simulation suitable for representing the city of Turin and actual cost of the delivering process. Results show the robustness of the proposed solution both in economical and user’s engagement terms, discussing also extreme situation.
 
-More detail on Article.pdf in the Github repository (https://github.com/MrFrankCin/ABMile)
+More detail on Article.pdf in the Github repository.
 
 ## Run
 
-Download ABMile from https://github.com/MrFrankCin/ABMile.
-Code is written in NetLogo 6.0 and it is possible to freely download it and run the simulation (https://ccl.northwestern.edu/netlogo/download.shtml).
+Download ABMile from GitHub repository.
+Code is written in NetLogo 6.0 and it is possible to freely download it and run the simulation (#https://ccl.northwestern.edu/netlogo/download.shtml).
 
 To run open `ABMile` and click on `Setup` and then `Go`. Choose parameters before running.
 
